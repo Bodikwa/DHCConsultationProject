@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DHC.DAL\DHC.DAL.csproj" />
+    <ProjectReference Include="..\DHCInterfaces\DHCInterfaces.csproj" />
+  </ItemGroup>
+
+</Project>
