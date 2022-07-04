@@ -1,0 +1,24 @@
+﻿@model DHC.DAL.Models.ModelCarCode
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>ModelCarCode</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            <label asp-for="ModelCode" class="control-label">Model Code</label>
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ModelCode)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ModelCodeId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

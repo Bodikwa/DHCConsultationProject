@@ -1,4 +1,5 @@
-﻿using DHCInterfaces.Interface;
+﻿using DHC.DAL.Models;
+using DHCInterfaces.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -27,7 +28,7 @@ namespace DHCConsultationWEPAPP.Controllers
         // GET: ManagerController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return View(_managerRepository.GetManagerById(id));
         }
 
         // GET: ManagerController/Create
@@ -39,10 +40,12 @@ namespace DHCConsultationWEPAPP.Controllers
         // POST: ManagerController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create([FromForm] Manager manager)
         {
             try
             {
+                _managerRepository.InsertManager(manager);
+                _managerRepository.SaveManager();
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -54,16 +57,18 @@ namespace DHCConsultationWEPAPP.Controllers
         // GET: ManagerController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            return View(_managerRepository.GetManagerById(id));
         }
 
         // POST: ManagerController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit([FromForm] Manager manager)
         {
             try
             {
+                _managerRepository.UpdateManager(manager);
+                _managerRepository.SaveManager();
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -75,16 +80,18 @@ namespace DHCConsultationWEPAPP.Controllers
         // GET: ManagerController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            return View(_managerRepository.GetManagerById(id));
         }
 
         // POST: ManagerController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete([FromForm] Manager manager)
         {
             try
             {
+                _managerRepository.DeleteManager(manager.ManagerId);
+                _managerRepository.SaveManager();
                 return RedirectToAction(nameof(Index));
             }
             catch

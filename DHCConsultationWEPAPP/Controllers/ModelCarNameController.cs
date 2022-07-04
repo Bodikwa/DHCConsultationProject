@@ -1,4 +1,5 @@
-﻿using DHCInterfaces.Interface;
+﻿using DHC.DAL.Models;
+using DHCInterfaces.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -28,7 +29,7 @@ namespace DHCConsultationWEPAPP.Controllers
         // GET: ModelCarNameController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return View(_modelCarNameRepository.GetModelCarNameById(id));
         }
 
         // GET: ModelCarNameController/Create
@@ -40,10 +41,12 @@ namespace DHCConsultationWEPAPP.Controllers
         // POST: ModelCarNameController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create([FromForm] ModelCarName modelCarName)
         {
             try
             {
+                _modelCarNameRepository.InsertModelCarName(modelCarName);
+                _modelCarNameRepository.SaveModelCarName();
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -55,16 +58,18 @@ namespace DHCConsultationWEPAPP.Controllers
         // GET: ModelCarNameController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            return View(_modelCarNameRepository.GetModelCarNameById(id));
         }
 
         // POST: ModelCarNameController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit([FromForm] ModelCarName modelCarName)
         {
             try
             {
+                _modelCarNameRepository.UpdateModelCarName(modelCarName);
+                _modelCarNameRepository.SaveModelCarName();
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -76,16 +81,18 @@ namespace DHCConsultationWEPAPP.Controllers
         // GET: ModelCarNameController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            return View(_modelCarNameRepository.GetModelCarNameById(id));
         }
 
         // POST: ModelCarNameController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete([FromForm] ModelCarName modelCarName)
         {
             try
             {
+                _modelCarNameRepository.DeleteModelCarName(modelCarName.ModelNameId);
+                _modelCarNameRepository.SaveModelCarName();
                 return RedirectToAction(nameof(Index));
             }
             catch
